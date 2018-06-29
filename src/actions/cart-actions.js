@@ -2,6 +2,18 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const UPDATE_CART = 'UPDATE_CART';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
 
+/*export const fetchTodos = () => {
+    return (dispatch) => {
+        return fetch('http://mock-wholesaleonline.getsandbox.com/testRedux').then((response) => {
+            console.log(response.json());
+            disptach({
+                 type: 'received_todos',
+                 payload: response.json()
+            });
+        });
+    }
+}*/
+
 export function addToCart(product, quantity, unitCost) {
   return {
     type: ADD_TO_CART,
