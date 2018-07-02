@@ -17,7 +17,7 @@ export default function(state=initialState, action) {
     case ADD_INITIAL_TODOS: {
       return {
         ...state,
-        cart: state.cart.concat(action.payload)
+        cart: action.payload
       }
     }
 

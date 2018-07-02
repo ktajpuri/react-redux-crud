@@ -8,6 +8,12 @@ class App extends React.Component {
    this.props.fetchTodos();
   }
 
+  calculateTotalCartValue = () => {
+    return this.props.cart.reduce((acc, curr) => {
+        return acc + (parseInt(curr.quantity) * parseFloat(curr.unitCost));
+    }, 0);
+  }
+
   render () {
     const { loading } = this.props;
 	return (
@@ -24,7 +30,8 @@ class App extends React.Component {
         <div className='col'>
 
           {loading && <h3 className='text-warning'>Loading ...</h3>}
-          {!loading && this.props.cart.map((item,index) => <CartItem {...item} key={index}/>)}
+          {!loading && <h3>Total cart value: {this.calculateTotalCartValue()}</h3>}
+          {!loading && this.props.cart.map((item,index) => <CartItem {...item} key={index} deleteItem={this.props.deleteFromCart}/>)}
                 {/*<button onClick={() => this.props.addToCart('tea 200kg', 23, 1.5)}>Add product to cart </button>
                 <button onClick={() => this.props.updateCart('tea 200kg', 21, 1.7)}>Update product in cart </button>
                 <button onClick={() => this.props.deleteFromCart('tea 200kg')}>Delete from cart </button>*/}
