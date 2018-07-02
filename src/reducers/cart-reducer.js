@@ -1,18 +1,8 @@
-import  { ADD_TO_CART, UPDATE_CART, DELETE_FROM_CART }  from '../actions/cart-actions';
+import  { ADD_TO_CART, UPDATE_CART, DELETE_FROM_CART, ADD_INITIAL_TODOS, TOGGLE_LOADING }  from '../actions/cart-actions';
 
 const initialState = {
-  cart: [
-    {
-      product: 'bread 700g',
-      quantity: 2,
-      unitCost: 90
-    },
-    {
-      product: 'milk 500ml',
-      quantity: 1,
-      unitCost: 47
-    }
-  ]
+  cart: [],
+  isLoading: false
 }
 
 export default function(state=initialState, action) {
@@ -21,6 +11,20 @@ export default function(state=initialState, action) {
       return {
         ...state,
         cart: [...state.cart, action.payload]
+      }
+    }
+
+    case ADD_INITIAL_TODOS: {
+      return {
+        ...state,
+        cart: state.cart.concat(action.payload)
+      }
+    }
+
+    case TOGGLE_LOADING: {
+      return {
+        ...state,
+        loading: action.payload
       }
     }
 
