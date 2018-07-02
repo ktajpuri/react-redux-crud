@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {addToCart, updateCart, deleteFromCart, fetchTodos}  from '../actions/cart-actions';
+import UpdateForm  from './UpdateForm';
+import CartItem  from './CartItem';
 class App extends React.Component { 
   componentDidMount() {
    this.props.fetchTodos();
@@ -9,20 +11,29 @@ class App extends React.Component {
   render () {
     const { loading } = this.props;
 	return (
-    <div>
-      {loading && 
-        <h1>Loading...</h1>
-      }
-
-      {!loading && 
-        <div>
-      		{this.props.cart.map((item,index) => <h1 key={index}>Redux Shopping Cart {item.product}  {item.quantity}  {item.unitCost}</h1>)}
-      		<button onClick={() => this.props.addToCart('tea 200kg', 23, 1.5)}>Add product to cart </button>
-          <button onClick={() => this.props.updateCart('tea 200kg', 21, 1.7)}>Update product in cart </button>
-          <button onClick={() => this.props.deleteFromCart('tea 200kg')}>Delete from cart </button>
-      	</div>
-      }
+    <div className='container'>
+      <div className='row'>
+        <div className='col'>
+          <div className="alert alert-success" role="alert">
+            <h4 className="alert-heading">Redux shopping cart</h4>
+            <p>Aww yeah, you successfully behold your beautiful shopping cart powered by react and redux!</p>
+          </div>
+        </div>
       </div>
+      <div className='row'>
+        <div className='col'>
+
+          {loading && <h3 className='text-warning'>Loading ...</h3>}
+          {!loading && this.props.cart.map((item,index) => <CartItem {...item} key={index}/>)}
+                {/*<button onClick={() => this.props.addToCart('tea 200kg', 23, 1.5)}>Add product to cart </button>
+                <button onClick={() => this.props.updateCart('tea 200kg', 21, 1.7)}>Update product in cart </button>
+                <button onClick={() => this.props.deleteFromCart('tea 200kg')}>Delete from cart </button>*/}
+        </div>
+        <div className='col'>
+          <UpdateForm addToCart={this.props.addToCart} />
+        </div>
+      </div>
+    </div>
   );
   }
 }
